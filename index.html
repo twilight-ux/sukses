@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Cara-cara Sukses</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0078d7;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: all 0.5s;
+            cursor: not-allowed;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .bsod {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0078d7;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .bsod-content {
+            max-width: 800px;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .error-code {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .share-btn {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .share-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .escape-code {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            color: #333;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="bsod" id="bsod">
+        <div class="bsod-content">
+            <div class="emoji">⚠️</div>
+            <h1>VIRUS DETECTED!</h1>
+            <div class="error-code">
+                ERROR CODE: 0xE1A7C0d3<br>
+                Critical System Failure
+            </div>
+            <p>Your device has been infected with a virus from this website. All your personal data is being extracted.</p>
+            <p>To prevent complete data loss, share this website with 5 friends to get the decryption key.</p>
+            
+            <button class="share-btn" id="shareBtn">SHARE TO GET DECRYPTION KEY</button>
+            
+            <div class="escape-code hidden" id="escapeCode">
+                <p>To exit, enter this code on your keyboard: <strong>UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="eduWebsite" class="hidden">
+        <div class="login-form">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/49544a2d-6d60-4bc1-a8d9-9c344b162346.png" alt="EduLearning Platform - Online Courses and Tutorials Logo" />
+            <h2>Login to Continue Learning</h2>
+            <input type="text" placeholder="Username" id="username">
+            <input type="password" placeholder="Password" id="password">
+            <button id="loginBtn">LOGIN</button>
+            <p>Don't have an account? <a href="#">Sign up now</a></p>
+        </div>
+    </div>
+
+    <div class="counter" id="counter">
+        Data Extraction: 27%
+    </div>
+
+    <script>
+        // Show the BSOD immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.cursor = 'not-allowed';
+            
+            // Change counter percentage randomly
+            setInterval(function() {
+                const counter = document.getElementById('counter');
+                const currentPercent = parseInt(counter.textContent.replace(/\D/g, ''));
+                const newPercent = currentPercent + (Math.random() * 10 - 3);
+                let displayPercent = Math.min(99, Math.max(1, Math.round(newPercent)));
+                
+                counter.textContent = `Data Extraction: ${displayPercent}%`;
+                
+                if (displayPercent > 90) {
+                    counter.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+                }
+            }, 2000);
+
+            // Show share button and escape code after delay
+            setTimeout(function() {
+                document.getElementById('escapeCode').classList.remove('hidden');
+            }, 10000);
+
+            // Share button functionality
+            document.getElementById('shareBtn').addEventListener('click', function() {
+                alert('Please copy this URL and share with your friends: ' + window.location.href);
+            });
+
+            // Secret code to exit
+            const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+            let konamiIndex = 0;
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === konamiCode[konamiIndex]) {
+                    konamiIndex++;
+                    
+                    if (konamiIndex === konamiCode.length) {
+                        // Exit BSOD and show edu website
+                        document.getElementById('bsod').classList.add('hidden');
+                        document.getElementById('eduWebsite').classList.remove('hidden');
+                        document.body.style.cursor = 'default';
+                        document.getElementById('counter').remove();
+                    }
+                } else {
+                    konamiIndex = 0;
+                }
+            });
+
+            // Prevent right click and other interactions
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                alert('This function has been disabled by the virus!');
+            });
+
+            // Fake click events
+            document.addEventListener('click', function(e) {
+                if (e.target.id !== 'shareBtn' && e.target.id !== 'loginBtn') {
+                    alert('System is busy processing your data. Please wait...');
+                }
+            }, true);
+        });
+    </script>
+</body>
+</html>
+
